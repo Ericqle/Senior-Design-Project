@@ -16,10 +16,10 @@ class StepperControl:
     pin_direction =0
     pin_ms1 = 0
     pin_ms2 = 0
-    p = None;
+    p = None
 
     # stepper driver init
-    def StepperControl(self, pin_step, pin_direction, pin_ms1, pin_ms2):
+    def __init__(self, pin_step, pin_direction, pin_ms1, pin_ms2):
         # set pins
         self.pin_step = pin_step
         self.pin_direction = pin_direction
