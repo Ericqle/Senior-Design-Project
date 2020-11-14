@@ -28,3 +28,14 @@ class DrawControl:
 
 if __name__ == '__main__':
     zotter = DrawControl()
+
+    dir_in = input('0 cw 1  ccw')
+    num_in = input('num steps')
+    dir = int(dir_in)
+    num = int(num_in)
+    if dir_in:
+        zotter.track.move_fixed(dir, num)
+        print(dir, "", num)
+    else:
+        zotter.track.move_fixed(dir, num)
+        print(dir, "", num)

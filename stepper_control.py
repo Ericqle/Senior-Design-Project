@@ -55,5 +55,5 @@ class StepperControl:
     1           0           Quarter
     1           1           Eight    
     """
-    def spin_fixed_step(self, direction, num_steps, type_step):
+    def spin_fixed_step_type(self, direction, num_steps, type_step):
         print("TODO")
