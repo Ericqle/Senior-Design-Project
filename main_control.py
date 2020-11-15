@@ -6,10 +6,10 @@ from stepper_control import StepperControl
 
 """
 
-TRACK_PIN_STEP = 0
-TRACK_PIN_DIRECTION =0
-TRACK_PIN_MS1 = 0
-TRACK_PIN_MS2 = 0
+TRACK_PIN_STEP = 16
+TRACK_PIN_DIRECTION = 18
+##TRACK_PIN_MS1 = 0
+##TRACK_PIN_MS2 = 0
 
 RAIL_PIN_STEP = 0
 RAIL_PIN_DIRECTION =0
@@ -21,8 +21,8 @@ class DrawControl:
     rail = None
 
     def __init__(self):
-        self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION, TRACK_PIN_MS1, TRACK_PIN_MS2)
-        self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
+        self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION)
+        ##self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
 
 if __name__ == '__main__':
     zotter = DrawControl()

@@ -14,17 +14,17 @@ import RPi.GPIO as GPIO, time
 class StepperControl:
     pin_step = 0
     pin_direction =0
-    pin_ms1 = 0
-    pin_ms2 = 0
+    ##pin_ms1 = 0
+    ##pin_ms2 = 0
     p = None
 
     # stepper driver init
-    def __init__(self, pin_step, pin_direction, pin_ms1, pin_ms2):
+    def __init__(self, pin_step, pin_direction):
         # set pins
         self.pin_step = pin_step
         self.pin_direction = pin_direction
-        self.pin_ms1 = pin_ms1
-        self.pin_ms2 = pin_ms2
+        ##self.pin_ms1 = pin_ms1
+        ##self.pin_ms2 = pin_ms2
 
         # init driver
         GPIO.setmode(GPIO.BOARD)
