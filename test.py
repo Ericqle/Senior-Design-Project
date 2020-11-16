@@ -1,29 +1,31 @@
-import RPi.GPIO as GPIO, time
+# Import libraries
+import RPi.GPIO as GPIO
+import time
 
+# Set GPIO numbering mode
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(16, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
-GPIO.setwarnings(False)
-GPIO.output(16, True)
 
-#iemand anders 500
-p = GPIO.PWM(16, 5000)
+# Set pin 11 as an output, and define as servo1 as PWM pin
+GPIO.setup(11,GPIO.OUT)
+servo1 = GPIO.PWM(11,50) # pin 11 for servo1, pulse 50Hz
 
-def SpinMotor(direction, num_steps):
-    p.ChangeFrequency(5000)
-    GPIO.output(18, direction)
-    while num_steps > 0:
-        p.start(1)
-        time.sleep(0.01)
-        num_steps -= 1
-    p.stop()
+# Start PWM running, with value of 0 (pulse off)
+servo1.start(0)
+
+# Loop to allow user to set servo angle. Try/finally allows exit
+# with execution of servo.stop and GPIO cleanup :)
+
+try:
+    while True:
+        #Ask user for angle and turn servo to it
+        angle = float(input('Enter angle between 0 & 180: '))
+        servo1.ChangeDutyCycle(2+(angle/18))
+        time.sleep(0.5)
+        servo1.ChangeDutyCycle(0)
+
+finally:
+    #Clean things up at the end
+    servo1.stop()
     GPIO.cleanup()
-    return True
+    print("Goodbye!")
 
-if __name__ == '__main__':
-    direction_input = input('Please enter o or c fro Open or Close:')
-    num_steps = input('Please enter the number of steps: ')
-    if direction_input == 'c':
-        SpinMotor(False, int(num_steps))
-    else:
-        SpinMotor(True, int(num_steps))
