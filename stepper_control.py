@@ -27,7 +27,6 @@ class StepperControl:
         ##self.pin_ms2 = pin_ms2
 
         # init driver
-        GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.pin_step, GPIO.OUT)
         GPIO.setup(self.pin_direction, GPIO.OUT)
         GPIO.setwarnings(False)

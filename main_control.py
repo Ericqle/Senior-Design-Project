@@ -1,31 +1,33 @@
 from stepper_control import StepperControl
 import RPi.GPIO as GPIO
 
+# Pi pins
+TRACK_PIN_STEP = 16
+TRACK_PIN_DIRECTION = 18
+#TRACK_PIN_MS1 = 0
+#TRACK_PIN_MS2 = 0
+RAIL_PIN_STEP = 0
+RAIL_PIN_DIRECTION =0
+#RAIL_PIN_MS1 = 0
+#RAIL_PIN_MS2 = 0
+
+# Primary full-board draw functions
 """
-    Primary source for drawing control. Implements the usage of TrackControl and RailControl
+    Primary source for drawing control. Implements the usage of StepperControl and ServoControl
     functions to draw an Image.
 
 """
-
-TRACK_PIN_STEP = 16
-TRACK_PIN_DIRECTION = 18
-##TRACK_PIN_MS1 = 0
-##TRACK_PIN_MS2 = 0
-
-RAIL_PIN_STEP = 0
-RAIL_PIN_DIRECTION =0
-RAIL_PIN_MS1 = 0
-RAIL_PIN_MS2 = 0
-
 class DrawControl:
     track = None
     rail = None
 
     def __init__(self):
+        # Init Board
+        GPIO.setmode(GPIO.BOARD)
 
-
+        # Init Steppers and Servos
         self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION)
-        ##self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
+        #self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
 
 if __name__ == '__main__':
     zotter = DrawControl()
