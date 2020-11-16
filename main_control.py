@@ -33,13 +33,18 @@ class DrawControl:
         #self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
         self.servo = ServoControl(SERVO_PIN_SIGNAL)
 
-        # Start servo touching pen holder
+        # Start servo for pen holder max height
+        self.servo.turn_angle(120)
+
+    def draw_hor_line(self, dir, step):
         self.servo.turn_angle(80)
+        self.track.spin_fixed_step(dir, step)
+        self.servo.turn_angle(120)
 
 if __name__ == '__main__':
     zotter = DrawControl()
 
-    test = input("track, rail, servo ")
+    test = input("track, rail, servo, hor ")
 
     while(test):
         if(test == "track"):
@@ -71,6 +76,9 @@ if __name__ == '__main__':
         elif(test == "servo"):
             angle = float(input("angle: "))
             zotter.servo.turn_angle(angle)
+
+        elif(test == "hor"):
+            zotter.draw_hor_line(0, 200)
 
         test = input("track, rail, servo ")
 
