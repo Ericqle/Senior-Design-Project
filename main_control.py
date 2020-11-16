@@ -11,7 +11,7 @@ RAIL_PIN_STEP = 0
 RAIL_PIN_DIRECTION = 0
 #RAIL_PIN_MS1 = 0
 #RAIL_PIN_MS2 = 0
-SERVO_PIN_SIGNAL = 0
+SERVO_PIN_SIGNAL = 22
 
 # Primary full-board draw functions
 """
