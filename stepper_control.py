@@ -1,4 +1,3 @@
-
 import RPi.GPIO as GPIO, time
 
 # Single Stepper Motor Control
