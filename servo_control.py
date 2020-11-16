@@ -16,10 +16,8 @@ class ServoControl:
         120: pen holder at max height
     """
     def turn_angle(self, angle):
-        self.servo.start(0)
         self.servo.ChangeDutyCycle(2 + (angle / 18))
         time.sleep(0.5)
         self.servo.ChangeDutyCycle(0)
-        self.servo.stop()
 
 
