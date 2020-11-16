@@ -1,4 +1,5 @@
 from stepper_control import StepperControl
+import RPi.GPIO as GPIO
 
 """
     Primary source for drawing control. Implements the usage of TrackControl and RailControl
@@ -21,6 +22,8 @@ class DrawControl:
     rail = None
 
     def __init__(self):
+
+
         self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION)
         ##self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
 
