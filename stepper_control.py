@@ -42,7 +42,7 @@ class StepperControl:
             time.sleep(0.01)
             num_steps -= 1
         self.p.stop()
-        GPIO.cleanup()
+
         return True
 
     # TODO spin cw/ccw with fixed amount of full/half/quarter/eigth steps

@@ -15,5 +15,5 @@ class ServoControl:
         time.sleep(0.5)
         self.servo.ChangeDutyCycle(0)
         self.servo.stop()
-        GPIO.cleanup()
+
 

@@ -70,3 +70,5 @@ if __name__ == '__main__':
             zotter.servo.turn_angle(angle)
 
         test = input("track, rail, servo ")
+
+    GPIO.cleanup()
