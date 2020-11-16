@@ -2,13 +2,15 @@ import RPi.GPIO as GPIO
 import time
 
 class ServoControl:
-    pin_signal = 0;
+    pin_signal = 0
+    servo = None
 
     def __init__(self, pin_signal):
         # servo pin init
         self.pin_signal = pin_signal
         GPIO.setup(self.pin_signal,GPIO.OUT)
         self.servo = GPIO.PWM(self.pin_signal, 50)
+        self.servo.start(0)
 
     # Turn a fixed angle:
     """
