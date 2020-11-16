@@ -1,22 +1,19 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BOARD)
+class ServoControl:
+    pin_signal = 0;
 
-GPIO.setup(11,GPIO.OUT)
-## default 50hz
-servo = GPIO.PWM(11, 50)
-servo.start(0)
+    def __init__(self, pin_signal):
+        self.pin_signal = pin_signal
+        GPIO.setup(self.pin_signal,GPIO.OUT)
+        self.servo = GPIO.PWM(self.pin_signal, 50)
 
-try:
-    while True:
-        angle = float(input('Enter angle between 0 & 180: '))
-        servo.ChangeDutyCycle(2 + (angle / 18))
+    def turn_angle(self, angle):
+        self.servo.start(0)
+        self.servo.ChangeDutyCycle(2 + (angle / 18))
         time.sleep(0.5)
-        servo.ChangeDutyCycle(0)
-
-finally:
-    servo.stop()
-    GPIO.cleanup()
-    print("Goodbye!")
+        self.servo.ChangeDutyCycle(0)
+        self.servo.stop()
+        GPIO.cleanup()
 
