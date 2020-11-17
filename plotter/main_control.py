@@ -1,5 +1,5 @@
-from stepper_control import StepperControl
-from servo_control import ServoControl
+from plotter.stepper_control import StepperControl
+from plotter.servo_control import ServoControl
 import RPi.GPIO as GPIO
 
 # Pi pins
