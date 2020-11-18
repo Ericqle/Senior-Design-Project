@@ -7,8 +7,8 @@ TRACK_PIN_STEP = 16
 TRACK_PIN_DIRECTION = 18
 #TRACK_PIN_MS1 = 0
 #TRACK_PIN_MS2 = 0
-RAIL_PIN_STEP = 13
-RAIL_PIN_DIRECTION = 15
+RAIL_PIN_STEP = 0
+RAIL_PIN_DIRECTION = 0
 #RAIL_PIN_MS1 = 0
 #RAIL_PIN_MS2 = 0
 SERVO_PIN_SIGNAL = 11
@@ -22,7 +22,7 @@ SERVO_PIN_SIGNAL = 11
 class DrawControl:
     track = None
     rail = None
-    pen_holder = None
+    servo = None
 
     def __init__(self):
         # Init Board
@@ -30,25 +30,21 @@ class DrawControl:
 
         # Init Steppers and Servos
         self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION)
-        self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION)
-        self.pen_holder = ServoControl(SERVO_PIN_SIGNAL)
+        #self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
+        self.servo = ServoControl(SERVO_PIN_SIGNAL)
 
         # Start servo for pen holder max height
-        self.pen_holder.turn_angle(120)
-
-    def close_board(self):
-        self.pen_holder.servo.stop()
-        GPIO.cleanup()
+        self.servo.turn_angle(120)
 
     def draw_hor_line(self, dir, step):
-        self.pen_holder.turn_angle(80)
+        self.servo.turn_angle(80)
         self.track.spin_fixed_step(dir, step)
-        self.pen_holder.turn_angle(120)
+        self.servo.turn_angle(120)
 
 if __name__ == '__main__':
     zotter = DrawControl()
 
-    test = input("track, rail, pen, hor ")
+    test = input("track, rail, servo, hor ")
 
     while(test):
         if(test == "track"):
@@ -79,11 +75,12 @@ if __name__ == '__main__':
 
         elif(test == "servo"):
             angle = float(input("angle: "))
-            zotter.pen_holder.turn_angle(angle)
+            zotter.servo.turn_angle(angle)
 
         elif(test == "hor"):
             zotter.draw_hor_line(0, 200)
 
-        test = input("track, rail, pen, hor ")
+        test = input("track, rail, servo, hor ")
 
-        zotter.close_board()
+    zotter.servo.stop()
+    GPIO.cleanup()
