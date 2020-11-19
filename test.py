@@ -3,10 +3,10 @@ from draw_control import DrawControl
 if __name__ == '__main__':
     zotter = DrawControl()
 
-    test = input("track, rail, servo, hor ")
+    test = input("track, rail, pen, hor, ver, square: ")
 
     while(test):
-        if(test == "track"):
+        if test == "track":
             dir_in = input('0 cw 1  ccw: ')
             num_in = input('num steps: ')
             dir = int(dir_in)
@@ -19,7 +19,7 @@ if __name__ == '__main__':
                 zotter.track.spin_fixed_step(dir, num)
                 print(dir, "", num)
 
-        elif(test == "rail"):
+        elif test == "rail":
             dir_in = input('0 cw 1  ccw: ')
             num_in = input('num steps: ')
             dir = int(dir_in)
@@ -32,11 +32,19 @@ if __name__ == '__main__':
                 zotter.rail.spin_fixed_step(dir, num)
                 print(dir, "", num)
 
-        elif(test == "servo"):
+        elif test == "pen":
             angle = float(input("angle: "))
             zotter.pen_holder.turn_angle(angle)
 
-        elif(test == "hor"):
+        elif test == "hor":
             zotter.draw_hor_line(0, 200)
 
-        test = input("track, rail, servo, hor ")
+        elif test == "ver":
+            zotter.draw_ver_line(0, 200)
+
+        elif test == "square":
+            zotter.draw_square(50)
+
+        test = input("track, rail, pen, hor, ver, square: ")
+
+    zotter.close_board()
