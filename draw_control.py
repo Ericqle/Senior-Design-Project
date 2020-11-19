@@ -41,17 +41,17 @@ class DrawControl:
         GPIO.cleanup()
 
     def draw_hor_line(self, dir, step):
-        self.pen_holder.turn_angle(80)
+        self.pen_holder.turn_angle(45)
         self.track.spin_fixed_step(dir, step)
         self.pen_holder.turn_angle(120)
 
     def draw_ver_line(self, dir, step):
-        self.pen_holder.turn_angle(80)
+        self.pen_holder.turn_angle(45)
         self.rail.spin_fixed_step(dir, step)
         self.pen_holder.turn_angle(120)
 
     def draw_square(self, step):
-        self.pen_holder.turn_angle(80)
+        self.pen_holder.turn_angle(45)
         self.rail.spin_fixed_step(0, step)
         self.track.spin_fixed_step(0, step)
         self.rail.spin_fixed_step(1, step)
