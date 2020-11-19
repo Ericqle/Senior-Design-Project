@@ -1,31 +1,42 @@
-# Import libraries
-import RPi.GPIO as GPIO
-import time
+from draw_control import DrawControl
 
-# Set GPIO numbering mode
-GPIO.setmode(GPIO.BOARD)
+if __name__ == '__main__':
+    zotter = DrawControl()
 
-# Set pin 11 as an output, and define as servo1 as PWM pin
-GPIO.setup(11,GPIO.OUT)
-servo1 = GPIO.PWM(11,50) # pin 11 for servo1, pulse 50Hz
+    test = input("track, rail, servo, hor ")
 
-# Start PWM running, with value of 0 (pulse off)
-servo1.start(0)
+    while(test):
+        if(test == "track"):
+            dir_in = input('0 cw 1  ccw: ')
+            num_in = input('num steps: ')
+            dir = int(dir_in)
+            num = int(num_in)
 
-# Loop to allow user to set servo angle. Try/finally allows exit
-# with execution of servo.stop and GPIO cleanup :)
+            if dir_in:
+                zotter.track.spin_fixed_step(dir, num)
+                print(dir, "", num)
+            else:
+                zotter.track.spin_fixed_step(dir, num)
+                print(dir, "", num)
 
-try:
-    while True:
-        #Ask user for angle and turn servo to it
-        angle = float(input('Enter angle between 0 & 180: '))
-        servo1.ChangeDutyCycle(2+(angle/18))
-        time.sleep(0.5)
-        servo1.ChangeDutyCycle(0)
+        elif(test == "rail"):
+            dir_in = input('0 cw 1  ccw: ')
+            num_in = input('num steps: ')
+            dir = int(dir_in)
+            num = int(num_in)
 
-finally:
-    #Clean things up at the end
-    servo1.stop()
-    GPIO.cleanup()
-    print("Goodbye!")
+            if dir_in:
+                zotter.rail.spin_fixed_step(dir, num)
+                print(dir, "", num)
+            else:
+                zotter.rail.spin_fixed_step(dir, num)
+                print(dir, "", num)
 
+        elif(test == "servo"):
+            angle = float(input("angle: "))
+            zotter.pen_holder.turn_angle(angle)
+
+        elif(test == "hor"):
+            zotter.draw_hor_line(0, 200)
+
+        test = input("track, rail, servo, hor ")
