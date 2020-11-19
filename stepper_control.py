@@ -31,10 +31,10 @@ class StepperControl:
         GPIO.setwarnings(False)
         GPIO.output(self.pin_step, True)
         self.p = GPIO.PWM(self.pin_step, 5000)
+        self.p.ChangeFrequency(5000)
 
     # spin cw/ccw with fixed amount of steps
     def spin_fixed_step(self, direction, num_steps):
-        self.p.ChangeFrequency(5000)
         GPIO.output(self.pin_direction, direction)
         while num_steps > 0:
             self.p.start(1)
