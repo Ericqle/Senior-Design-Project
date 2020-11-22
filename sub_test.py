@@ -15,7 +15,6 @@ def SpinMotor(direction, num_steps):
         p.start(1)
         time.sleep(0.01)
         num_steps -= 1
-    p.stop()
     return True
 
 def ChangeFreq(freq):
@@ -35,4 +34,5 @@ if __name__ == '__main__':
 
         dir_in = input('0 cw 1  ccw: ')
 
+    p.stop()
     GPIO.cleanup()
