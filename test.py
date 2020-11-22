@@ -37,16 +37,16 @@ if __name__ == '__main__':
             zotter.pen_holder.turn_angle(angle)
 
         elif test == "hor":
-            zotter.draw_hor_line(0, 200)
+            zotter.draw_hor_line(0, 100)
 
         elif test == "ver":
-            zotter.draw_ver_line(0, 200)
+            zotter.draw_ver_line(0, 100)
 
         elif test == "square":
             zotter.draw_square(50)
 
         elif test == "diag":
-            zotter.draw_diagonal(0,0,200,200)
+            zotter.draw_diagonal(0,0,100,100)
 
         test = input("track, rail, pen, hor, ver, square, diag: ")
 
