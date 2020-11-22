@@ -33,7 +33,7 @@ class StepperControl:
         self.p = GPIO.PWM(self.pin_step, 5000)
         self.p.ChangeFrequency(5000)
 
-    # spin cw/ccw with fixed amount of steps
+    # spin cw/ccw with fixed amount of steps with default delay
     def spin_fixed_step(self, direction, num_steps):
         GPIO.output(self.pin_direction, direction)
         while num_steps > 0:
@@ -41,7 +41,16 @@ class StepperControl:
             time.sleep(0.01)
             num_steps -= 1
         self.p.stop()
+        return True
 
+    # spin cw/ccw with fixed amount of steps with variable delay
+    def spin_fixed_step_delay(self, direction, num_steps, delay):
+        GPIO.output(self.pin_direction, direction)
+        while num_steps > 0:
+            self.p.start(1)
+            time.sleep(delay)
+            num_steps -= 1
+        self.p.stop()
         return True
 
     # TODO spin cw/ccw with fixed amount of full/half/quarter/eigth steps
