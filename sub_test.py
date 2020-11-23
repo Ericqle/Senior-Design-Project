@@ -8,8 +8,6 @@ GPIO.setup(37, GPIO.OUT)
 GPIO.setwarnings(False)
 GPIO.output(16, True)
 
-GPIO.output(36, False)
-GPIO.output(37, False)
 p = GPIO.PWM(16, 5000)
 
 def SpinMotor(direction, num_steps):
@@ -21,9 +19,6 @@ def SpinMotor(direction, num_steps):
         num_steps -= 1
     p.stop()
     return True
-
-def ChangeFreq(freq):
-    p.ChangeFrequency(freq)
 
 if __name__ == '__main__':
 
