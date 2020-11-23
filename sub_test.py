@@ -5,8 +5,13 @@ GPIO.setup(16, GPIO.OUT)
 GPIO.setup(18, GPIO.OUT)
 GPIO.setup(36, GPIO.OUT)
 GPIO.setup(37, GPIO.OUT)
+GPIO.setup(22, GPIO.OUT)
 GPIO.setwarnings(False)
 GPIO.output(16, True)
+
+GPIO.output(22, False)
+GPIO.output(36, False)
+GPIO.output(37, False)
 
 p = GPIO.PWM(16, 5000)
 
