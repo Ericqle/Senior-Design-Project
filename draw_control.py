@@ -6,12 +6,12 @@ import threading
 # Pi pins
 TRACK_PIN_STEP = 16
 TRACK_PIN_DIRECTION = 18
-#TRACK_PIN_MS1 = 0
-#TRACK_PIN_MS2 = 0
+TRACK_PIN_MS1 = 36
+TRACK_PIN_MS2 = 37
 RAIL_PIN_STEP = 13
 RAIL_PIN_DIRECTION = 15
-#RAIL_PIN_MS1 = 0
-#RAIL_PIN_MS2 = 0
+RAIL_PIN_MS1 = 29
+RAIL_PIN_MS2 = 31
 SERVO_PIN_SIGNAL = 11
 
 # Primary full-board draw functions
@@ -30,8 +30,8 @@ class DrawControl:
         GPIO.setmode(GPIO.BOARD)
 
         # Init Steppers and Servos
-        self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION)
-        self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION)
+        self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION, TRACK_PIN_MS1, TRACK_PIN_MS2)
+        self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
         self.pen_holder = ServoControl(SERVO_PIN_SIGNAL)
 
         # Start servo for pen holder max height
@@ -60,10 +60,6 @@ class DrawControl:
         self.pen_holder.turn_angle(120)
 
     # spin both motors with fixed amount of steps
-    """
-        Concurrency via threads. Motors reach destination based on constant time
-        -of longer axis-; and delays are changed to reflect this
-    """
     def draw_diagonal(self, dir1, dir2, num_steps1, num_steps2):
         self.pen_holder.turn_angle(45)
 
@@ -89,3 +85,7 @@ class DrawControl:
         t2.join()
 
         self.pen_holder.turn_angle(120)
+
+    def set_step_size(self, size_step):
+        self.track.set_step_size(size_step)
+        self.rail.set_step_size(size_step)
