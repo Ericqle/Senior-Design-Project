@@ -30,8 +30,8 @@ class DrawControl:
         GPIO.setmode(GPIO.BOARD)
 
         # Init Steppers and Servos
-        self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION, TRACK_PIN_MS1, TRACK_PIN_MS2)
-        self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION, RAIL_PIN_MS1, RAIL_PIN_MS2)
+        self.track = StepperControl(TRACK_PIN_STEP, TRACK_PIN_DIRECTION)
+        self.rail = StepperControl(RAIL_PIN_STEP, RAIL_PIN_DIRECTION)
         self.pen_holder = ServoControl(SERVO_PIN_SIGNAL)
 
         # Start servo for pen holder max height
@@ -85,7 +85,3 @@ class DrawControl:
         t2.join()
 
         self.pen_holder.turn_angle(120)
-
-    def set_step_size(self, size_step):
-        self.track.set_step_size(size_step)
-        self.rail.set_step_size(size_step)
