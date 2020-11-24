@@ -43,11 +43,11 @@ if __name__ == '__main__':
             zotter.draw_ver_line(0, 100)
 
         elif test == "diag":
-            steps1 = input('0 cw 1  ccw: ')
-            steps2 = input('num steps: ')
+            steps1 = input('x steps: ')
+            steps2 = input('y steps: ')
             s1 = int(steps1)
             s2 = int(steps2)
-            zotter.draw_diagonal(1, 1, steps1, steps2)
+            zotter.draw_diagonal(1, 1, s1, s2)
 
         test = input("track, rail, pen, hor, ver, diag: ")
 
