@@ -1,5 +1,5 @@
-reposition 150 100
-draw 200 150
-draw 150 200
-draw 100 150
-draw 150 100
+reposition 150 50
+draw 200 100
+draw 150 150
+draw 100 100
+draw 150 50
