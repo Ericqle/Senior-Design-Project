@@ -1,0 +1,75 @@
+from draw_control import DrawControl
+
+class Parser:
+    zotter_plotter = None
+    PEN_DOWN = 0
+    CURRENT_X = 0
+    CURRENT_Y = 0
+
+    def __init__(self):
+        self.zotter_plotter = DrawControl()
+
+    def execute_draw(self, x, y):
+        num_steps1 = x - self.CURRENT_X
+        num_steps2 = y - self.CURRENT_Y
+        dir1 = 1
+        dir2 = 1
+
+        if num_steps1 < 0:
+            dir1 = 0
+        if num_steps2 < 0:
+            dir2 = 0
+
+        if self.PEN_DOWN == 0:
+            #self.zotter_plotter.pen_down()
+            print("pen down")
+            self.PEN_DOWN = 1
+
+        #self.zotter_plotter.draw_diagonal(dir1, dir2, abs(num_steps1), abs(num_steps2))
+        print("draw " + str(dir1) + " " + str(dir2) + " " + str(abs(num_steps1)) + " " + str(abs(num_steps2)))
+        self.CURRENT_X = x
+        self.CURRENT_Y = y
+
+    def execute_reposition(self, x, y):
+        num_steps1 = x - self.CURRENT_X
+        num_steps2 = y - self.CURRENT_Y
+        dir1 = 1
+        dir2 = 1
+
+        if num_steps1 < 0:
+            dir1 = 0
+        if num_steps2 < 0:
+            dir2 = 0
+
+        if self.PEN_DOWN == 1:
+            #self.zotter_plotter.pen_up()
+            print("pen up")
+            self.PEN_DOWN = 0
+
+        #self.zotter_plotter.draw_diagonal(dir1, dir2, abs(num_steps1), abs(num_steps2))
+        print("reposition " + str(dir1) + " " + str(dir2) + " " + str(abs(num_steps1)) + " " + str(abs(num_steps2)))
+        self.CURRENT_X = x
+        self.CURRENT_Y = y
+
+    def parse_and_run(self, filename):
+        instruction_file = open(filename, 'r')
+        Instructions = instruction_file.readlines()
+
+        for instruction in Instructions:
+            instruction_elem = instruction.split(" ")
+
+            if instruction_elem[0].__contains__("draw"):
+                x = int(instruction_elem[1])
+                y = int(instruction_elem[2])
+                self.execute_draw(x, y)
+
+            elif instruction_elem[0].__contains__("reposition"):
+                x = int(instruction_elem[1])
+                y = int(instruction_elem[2])
+                self.execute_reposition(x, y)
+
+
+if __name__ == '__main__':
+    parser = Parser()
+    parser.parse_and_run("instructions.txt")
+

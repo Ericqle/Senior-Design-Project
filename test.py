@@ -3,7 +3,7 @@ from draw_control import DrawControl
 if __name__ == '__main__':
     zotter = DrawControl()
 
-    test = input("track, rail, pen, hor, ver, square, diag: ")
+    test = input("track, rail, pen, hor, ver, diag: ")
 
     while(test):
         if test == "track":
@@ -42,12 +42,9 @@ if __name__ == '__main__':
         elif test == "ver":
             zotter.draw_ver_line(0, 100)
 
-        elif test == "square":
-            zotter.draw_square(50)
-
         elif test == "diag":
             zotter.draw_diagonal(0,0,100,100)
 
-        test = input("track, rail, pen, hor, ver, square, diag: ")
+        test = input("track, rail, pen, hor, ver, diag: ")
 
     zotter.close_board()

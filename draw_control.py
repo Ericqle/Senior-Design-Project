@@ -41,28 +41,20 @@ class DrawControl:
         self.pen_holder.servo.stop()
         GPIO.cleanup()
 
-    def draw_hor_line(self, dir, step):
+    def pen_down(self):
         self.pen_holder.turn_angle(45)
-        self.track.spin_fixed_step(dir, step)
+
+    def pen_up(self):
         self.pen_holder.turn_angle(120)
 
-    def draw_ver_line(self, dir, step):
-        self.pen_holder.turn_angle(45)
-        self.rail.spin_fixed_step(dir, step)
-        self.pen_holder.turn_angle(120)
+    def draw_hor_line(self, dir, num_steps):
+        self.track.spin_fixed_step(dir, num_steps)
 
-    def draw_square(self, step):
-        self.pen_holder.turn_angle(45)
-        self.rail.spin_fixed_step(0, step)
-        self.track.spin_fixed_step(0, step)
-        self.rail.spin_fixed_step(1, step)
-        self.track.spin_fixed_step(1, step)
-        self.pen_holder.turn_angle(120)
+    def draw_ver_line(self, dir, num_steps):
+        self.rail.spin_fixed_step(dir, num_steps)
 
     # spin both motors with fixed amount of steps
     def draw_diagonal(self, dir1, dir2, num_steps1, num_steps2):
-        self.pen_holder.turn_angle(45)
-
         delay1 = 0.01
         delay2 = 0.01
 
@@ -83,5 +75,3 @@ class DrawControl:
 
         t1.join()
         t2.join()
-
-        self.pen_holder.turn_angle(120)
