@@ -61,11 +61,9 @@ class DrawControl:
         if num_steps1 > num_steps2:
             time = delay1 * num_steps1
             delay2 = float("{:.4f}".format(time / num_steps2))
-            print(delay2)
         elif num_steps2 > num_steps1:
             time = delay2 * num_steps2
             delay1 = float("{:.4f}".format(time / num_steps1))
-            print(delay1)
 
         t1 = threading.Thread(target=self.track.spin_fixed_step_delay, args=(dir1, num_steps1, delay1))
         t2 = threading.Thread(target=self.rail.spin_fixed_step_delay, args=(dir2, num_steps2, delay2))

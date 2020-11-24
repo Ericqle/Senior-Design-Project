@@ -2,12 +2,12 @@ from draw_control import DrawControl
 
 class Parser:
     zotter_plotter = None
-    PEN_DOWN = 0
-    CURRENT_X = 0
-    CURRENT_Y = 0
 
     def __init__(self):
         self.zotter_plotter = DrawControl()
+        self.PEN_DOWN = 0
+        self.CURRENT_X = 0
+        self.CURRENT_Y = 0
 
     def execute_draw(self, x, y):
         num_steps1 = x - self.CURRENT_X
