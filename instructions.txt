@@ -1,4 +1,4 @@
-reposition 20 50
+reposition 20 150
 draw 50 150
 draw 20 80
 draw 50 80
