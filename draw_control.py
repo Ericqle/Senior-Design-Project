@@ -57,16 +57,25 @@ class DrawControl:
     def draw_diagonal(self, dir1, dir2, num_steps1, num_steps2):
         delay1 = 0.01
         delay2 = 0.01
+        freq1 = 5000
+        freq2 = 5000
 
         if num_steps1 > num_steps2:
             time = delay1 * num_steps1
             delay2 = float("{:.4f}".format(time / num_steps2))
+            freq2 = (freq2 / (num_steps1 / num_steps2))
+            freq2 = float("{:.4f}".format(freq2))
         elif num_steps2 > num_steps1:
             time = delay2 * num_steps2
             delay1 = float("{:.4f}".format(time / num_steps1))
+            freq1 = (freq1 / (num_steps2 / num_steps1))
+            freq1 = float("{:.4f}".format(freq1))
 
-        t1 = threading.Thread(target=self.track.spin_fixed_step_delay, args=(dir1, num_steps1, delay1))
-        t2 = threading.Thread(target=self.rail.spin_fixed_step_delay, args=(dir2, num_steps2, delay1))
+        print(str(dir1) + " " + str(num_steps1) + " " + str(delay1) + " " + str(freq1))
+        print(str(dir2) + " " + str(num_steps2) + " " + str(delay2) + " " + str(freq2))
+
+        t1 = threading.Thread(target=self.track.spin_fixed_step_delay_freq, args=(dir1, num_steps1, delay1, freq1))
+        t2 = threading.Thread(target=self.rail.spin_fixed_step_delay_freq, args=(dir2, num_steps2, delay2, freq2))
 
         t1.start()
         t2.start()

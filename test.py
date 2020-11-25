@@ -8,29 +8,13 @@ if __name__ == '__main__':
     while(test):
         if test == "track":
             dir_in = input('0 cw 1  ccw: ')
-            num_in = input('num steps: ')
-            dir = int(dir_in)
-            num = int(num_in)
-
-            if dir_in:
-                zotter.track.spin_fixed_step(dir, num)
-                print(dir, "", num)
-            else:
-                zotter.track.spin_fixed_step(dir, num)
-                print(dir, "", num)
+            dir = dir_in.split(" ")
+            zotter.track.spin_fixed_step(int(dir[0]), int(dir[1]))
 
         elif test == "rail":
             dir_in = input('0 cw 1  ccw: ')
-            num_in = input('num steps: ')
-            dir = int(dir_in)
-            num = int(num_in)
-
-            if dir_in:
-                zotter.rail.spin_fixed_step(dir, num)
-                print(dir, "", num)
-            else:
-                zotter.rail.spin_fixed_step(dir, num)
-                print(dir, "", num)
+            dir = dir_in.split(" ")
+            zotter.rail.spin_fixed_step(int(dir[0]), int(dir[1]))
 
         elif test == "pen":
             angle = float(input("angle: "))
@@ -47,11 +31,9 @@ if __name__ == '__main__':
             zotter.draw_ver_line(0, s)
 
         elif test == "diag":
-            steps1 = input('x steps: ')
-            steps2 = input('y steps: ')
-            s1 = int(steps1)
-            s2 = int(steps2)
-            zotter.draw_diagonal(1, 1, s1, s2)
+            dir_in = input('dir1 dir2 steps1 steps2: ')
+            dir = dir_in.split(" ")
+            zotter.draw_diagonal(int(dir[0]), int(dir[1]), int(dir[2]), int(dir[3]))
 
         test = input("track, rail, pen, hor, ver, diag: ")
 
