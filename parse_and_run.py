@@ -20,13 +20,24 @@ class Parser:
         if num_steps2 < 0:
             dir2 = 0
 
+        num_steps1 = abs(num_steps1)
+        num_steps2 = abs(num_steps2)
+
         if self.PEN_DOWN == 0:
             self.zotter_plotter.pen_down()
             print("pen down")
             self.PEN_DOWN = 1
 
-        self.zotter_plotter.draw_diagonal(dir1, dir2, abs(num_steps1), abs(num_steps2))
-        print("draw " + str(dir1) + " " + str(dir2) + " " + str(abs(num_steps1)) + " " + str(abs(num_steps2)))
+        if num_steps1 == 0:
+            self.zotter_plotter.draw_ver_line(dir2, num_steps2)
+            print("draw " + str(dir2) + " " + str(num_steps2))
+        elif num_steps2 == 0:
+            self.zotter_plotter.draw_hor_line(dir1, num_steps1)
+            print("draw " + str(dir1) + " " + str(num_steps1))
+        else:
+            self.zotter_plotter.draw_diagonal(dir1, dir2, num_steps1, num_steps2)
+            print("draw " + str(dir1) + " " + str(dir2) + " " + str(num_steps1) + " " + str(num_steps2))
+
         self.CURRENT_X = x
         self.CURRENT_Y = y
 
@@ -41,13 +52,24 @@ class Parser:
         if num_steps2 < 0:
             dir2 = 0
 
+        num_steps1 = abs(num_steps1)
+        num_steps2 = abs(num_steps2)
+
         if self.PEN_DOWN == 1:
             self.zotter_plotter.pen_up()
             print("pen up")
             self.PEN_DOWN = 0
 
-        self.zotter_plotter.draw_diagonal(dir1, dir2, abs(num_steps1), abs(num_steps2))
-        print("reposition " + str(dir1) + " " + str(dir2) + " " + str(abs(num_steps1)) + " " + str(abs(num_steps2)))
+        if num_steps1 == 0:
+            self.zotter_plotter.draw_ver_line(dir2, num_steps2)
+            print("draw " + str(dir2) + " " + str(num_steps2))
+        elif num_steps2 == 0:
+            self.zotter_plotter.draw_hor_line(dir1, num_steps1)
+            print("draw " + str(dir1) + " " + str(num_steps1))
+        else:
+            self.zotter_plotter.draw_diagonal(dir1, dir2, num_steps1, num_steps2)
+            print("draw " + str(dir1) + " " + str(dir2) + " " + str(num_steps1) + " " + str(num_steps2))
+
         self.CURRENT_X = x
         self.CURRENT_Y = y
 

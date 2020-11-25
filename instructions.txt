@@ -3,3 +3,9 @@ draw 200 100
 draw 150 150
 draw 100 100
 draw 150 50
+reposition 50 50
+draw 100 50
+draw 100 100
+draw 50 100
+draw 50 50
+reposition 0 0
