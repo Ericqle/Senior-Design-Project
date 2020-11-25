@@ -7,12 +7,12 @@ if __name__ == '__main__':
 
     while(test):
         if test == "track":
-            dir_in = input('0 cw 1  ccw: ')
+            dir_in = input('dir step: ')
             dir = dir_in.split(" ")
             zotter.track.spin_fixed_step(int(dir[0]), int(dir[1]))
 
         elif test == "rail":
-            dir_in = input('0 cw 1  ccw: ')
+            dir_in = input('dir step: ')
             dir = dir_in.split(" ")
             zotter.rail.spin_fixed_step(int(dir[0]), int(dir[1]))
 
