@@ -30,3 +30,4 @@ draw 300 150
 draw 300 120
 draw 270 120
 draw 300 80
+reposition 0 0
