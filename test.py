@@ -37,12 +37,12 @@ if __name__ == '__main__':
             zotter.pen_holder.turn_angle(angle)
 
         elif test == "hor":
-            steps = input('y steps: ')
+            steps = input('steps: ')
             s = int(steps)
             zotter.draw_hor_line(0, s)
 
         elif test == "ver":
-            steps = input('y steps: ')
+            steps = input('steps: ')
             s = int(steps)
             zotter.draw_ver_line(0, s)
 

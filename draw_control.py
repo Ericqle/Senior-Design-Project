@@ -65,11 +65,13 @@ class DrawControl:
             time = delay2 * num_steps2
             delay1 = float("{:.4f}".format(time / num_steps1))
 
-        t1 = threading.Thread(target=self.track.spin_fixed_step_delay, args=(dir1, num_steps1, delay1))
-        t2 = threading.Thread(target=self.rail.spin_fixed_step_delay, args=(dir2, num_steps2, delay2))
-
-        t1.start()
-        t2.start()
-
-        t1.join()
-        t2.join()
+        self.track.spin_fixed_step_delay(dir1, num_steps1, delay1)
+        self.rail.spin_fixed_step_delay(dir2, num_steps2, delay1)
+        # t1 = threading.Thread(target=self.track.spin_fixed_step_delay, args=(dir1, num_steps1, delay1))
+        # t2 = threading.Thread(target=self.rail.spin_fixed_step_delay, args=(dir2, num_steps2, delay2))
+        #
+        # t1.start()
+        # t2.start()
+        #
+        # t1.join()
+        # t2.join()
