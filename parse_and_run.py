@@ -93,5 +93,5 @@ class Parser:
 
 if __name__ == '__main__':
     parser = Parser()
-    parser.parse_and_run("instructions.txt")
+    parser.parse_and_run("instructions_peter.txt")
 
