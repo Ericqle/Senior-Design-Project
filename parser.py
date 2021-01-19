@@ -137,4 +137,4 @@ if __name__ == '__main__':
     # parser.run("instructions_peter.txt")
     # parser.parse_image("images/peter.png")
     # parser.parse_image("images/abstract.jpg")
-    parser.run("instructions.txt")
+    parser.run("instructions_temp.txt")
