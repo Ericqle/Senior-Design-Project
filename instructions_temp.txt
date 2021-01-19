@@ -1,11 +1,12 @@
 reposition 100 100
-draw 100 150
-draw 150 150
+draw 125 125
 draw 150 100
+draw 125 75
 draw 100 100
 reposition 0 0
 reposition 100 100
-draw 100 150
-draw 150 150
+draw 125 125
 draw 150 100
+draw 125 75
 draw 100 100
+reposition 0 0
