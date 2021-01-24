@@ -1,4 +1,6 @@
 from draw_control import DrawControl
+from matplotlib import pyplot as plt
+import numpy as np
 import cv2 as cv
 
 
@@ -106,9 +108,8 @@ class Parser:
 
         imgray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
         ret, thresh = cv.threshold(imgray, 127, 255, 0)
-
         contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-        cv.drawContours(image, contours, -1, (0, 255, 0), 3)
+
         for contour in contours:
             reposition = False
             for point in contour[::self.PRECISION]:
@@ -128,13 +129,14 @@ class Parser:
             file.write(instruction + "\n")
         file.close()
 
-        cv.imshow('Contours', image)
-        cv.waitKey(0)
-
+        cv.drawContours(image, contours, -1, (0, 255, 0), 3)
+        # cv.imshow('Contours', image)
+        # cv.waitKey(0)
+        # cv.destroyAllWindows()
 
 if __name__ == '__main__':
     parser = Parser()
     # parser.run("instructions_peter.txt")
-    # parser.parse_image("images/peter.png")
+    parser.parse_image("images/peter2.jpg")
     # parser.parse_image("images/abstract.jpg")
     parser.run("instructions_temp.txt")
