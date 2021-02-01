@@ -8,7 +8,7 @@ class Parser:
     zotter_plotter = None
     HEIGHT_PAPER = 150
     WIDTH_PAPER = 250
-    PRECISION = 80
+    PRECISION = 25
 
     instructions = list()
     x_points = list()
@@ -165,6 +165,5 @@ class Parser:
 if __name__ == '__main__':
     parser = Parser()
     # parser.parse_image("images/peter2.jpg")
-    parser.run("instructions.txt")
-    # parser.run_dots("instructions.txt")
+    parser.run_dots("instructions.txt")
     # parser.parse_image("images/abstract.jpg")
