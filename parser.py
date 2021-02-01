@@ -164,7 +164,7 @@ class Parser:
 
 if __name__ == '__main__':
     parser = Parser()
-    parser.parse_image("images/peter2.jpg")
+    # parser.parse_image("images/peter2.jpg")
     parser.run("instructions.txt")
     # parser.run_dots("instructions.txt")
     # parser.parse_image("images/abstract.jpg")
