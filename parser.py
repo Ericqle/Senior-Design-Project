@@ -8,9 +8,11 @@ class Parser:
     zotter_plotter = None
     HEIGHT_PAPER = 150
     WIDTH_PAPER = 250
-    PRECISION = 25
+    PRECISION = 50
 
     instructions = list()
+    x_points = list()
+    y_points = list()
 
     def __init__(self):
         self.zotter_plotter = DrawControl()
@@ -99,6 +101,18 @@ class Parser:
                 y = int(instruction_elem[2])
                 self.execute_reposition(x, y)
 
+    def run_dots(self, filename):
+        instruction_file = open(filename, 'r')
+        Instructions = instruction_file.readlines()
+
+        for instruction in Instructions:
+            instruction_elem = instruction.split(" ")
+            x = int(instruction_elem[1])
+            y = int(instruction_elem[2])
+            self.execute_reposition(x, y)
+            self.zotter_plotter.pen_down()
+            self.zotter_plotter.pen_up()
+
     def parse_image(self, path):
 
         image = cv.imread(path)
@@ -108,13 +122,23 @@ class Parser:
 
         imgray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
         ret, thresh = cv.threshold(imgray, 127, 255, 0)
+
+        # 2 GAUSSIAN
+        blurredimg = cv.GaussianBlur(imgray, (3, 3), 0)  # odd only. greater = cleaner
+        thresh = cv.adaptiveThreshold(blurredimg, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 3, 3)
+
         contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+        cv.drawContours(image, contours, -1, (0, 255, 0), 3)
 
         for contour in contours:
             reposition = False
             for point in contour[::self.PRECISION]:
                 x = int(round(scale_x * point[0][0].item()))
                 y = int(round(scale_y * point[0][1].item()))
+
+                self.x_points.append(x)
+                self.y_points.append(y)
+
                 if not reposition:
                     instruction = "reposition " + str(x) + " " + str(y)
                     self.instructions.append(instruction)
@@ -129,7 +153,11 @@ class Parser:
             file.write(instruction + "\n")
         file.close()
 
-        cv.drawContours(image, contours, -1, (0, 255, 0), 3)
+        plt.plot(self.x_points, self.y_points, 'ro')
+        plt.axis([0, 250, 0, 150])
+        plt.gca().invert_yaxis()
+        plt.show()
+
         # cv.imshow('Contours', image)
         # cv.waitKey(0)
         # cv.destroyAllWindows()
@@ -137,6 +165,7 @@ class Parser:
 if __name__ == '__main__':
     parser = Parser()
     # parser.run("instructions_peter.txt")
-    parser.parse_image("images/peter2.jpg")
+    parser.parse_image("images/peter.png")
+    # parser.run_dots("instructions_temp.txt")
     # parser.parse_image("images/abstract.jpg")
-    parser.run("instructions_temp.txt")
+    # parser.run("instructions_temp.txt")
