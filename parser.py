@@ -128,7 +128,7 @@ class Parser:
         thresh = cv.adaptiveThreshold(blurredimg, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 3, 3)
 
         contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-        cv.drawContours(image, contours, 10, (0, 255, 0), 3)
+        cv.drawContours(image, contours, -1, (0, 255, 0), 3)
 
         for contour in contours:
             reposition = False
@@ -153,7 +153,7 @@ class Parser:
             file.write(instruction + "\n")
         file.close()
 
-        plt.plot(self.x_points, self.y_points, 'ro')
+        plt.plot(self.x_points, self.y_points, "ro", markersize=2)
         plt.axis([0, 250, 0, 150])
         plt.gca().invert_yaxis()
         plt.gca().set_aspect('equal', adjustable='box')
@@ -165,6 +165,7 @@ class Parser:
 
 if __name__ == '__main__':
     parser = Parser()
-    parser.parse_image("images/wojak.jpg")
+    # parser.parse_image("images/wojak.jpg")
+    # parser.parse_image("images/minecraft.jpg")
     # parser.run_dots("instructions.txt")
     # parser.parse_image("images/abstract.jpg")
