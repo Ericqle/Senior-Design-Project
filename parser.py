@@ -134,7 +134,7 @@ class Parser:
             reposition = False
             for point in contour[::self.PRECISION]:
                 x = int(round(scale_x * point[0][0].item()))
-                y = int(round(scale_y * point[0][1].item()))
+                y = int(round(scale_x * point[0][1].item()))
 
                 self.x_points.append(x)
                 self.y_points.append(y)
@@ -165,7 +165,6 @@ class Parser:
 
 if __name__ == '__main__':
     parser = Parser()
-    # parser.run("the_rock_instructions.txt")
     parser.parse_image("images/wojak.jpg")
-    parser.run_dots("instructions.txt")
+    # parser.run_dots("instructions.txt")
     # parser.parse_image("images/abstract.jpg")
