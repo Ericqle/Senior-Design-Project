@@ -8,7 +8,7 @@ class Parser:
     zotter_plotter = None
     HEIGHT_PAPER = 150
     WIDTH_PAPER = 250
-    PRECISION = 10
+    PRECISION = 2
 
     instructions = list()
     x_points = list()
@@ -115,10 +115,15 @@ class Parser:
 
     def parse_image(self, path):
 
-        image = cv.imread(path)
+        pre_image = cv.imread(path)
 
-        scale_x = self.WIDTH_PAPER / image.shape[1]
-        scale_y = self.HEIGHT_PAPER / image.shape[0]
+        scale_percent = 25  # percent of original size
+        width = int(pre_image.shape[1] * scale_percent / 100)
+        height = int(pre_image.shape[0] * scale_percent / 100)
+        dim = (width, height)
+
+        # resize image
+        image = cv.resize(pre_image, dim, interpolation=cv.INTER_AREA)
 
         imgray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
         ret, thresh = cv.threshold(imgray, 127, 255, 0)
@@ -133,12 +138,11 @@ class Parser:
         for contour in contours:
             reposition = False
             for point in contour[::self.PRECISION]:
-                x = int(round(scale_x * point[0][0].item()))
-                y = int(round(scale_x * point[0][1].item()))
+                x = int(point[0][0].item())
+                y = int(point[0][1].item())
 
                 self.x_points.append(x)
                 self.y_points.append(y)
-
                 if not reposition:
                     instruction = "reposition " + str(x) + " " + str(y)
                     self.instructions.append(instruction)
@@ -165,7 +169,7 @@ class Parser:
 
 if __name__ == '__main__':
     parser = Parser()
-    # parser.parse_image("images/wojak.jpg")
+    parser.parse_image("images/wojak.jpg")
     # parser.parse_image("images/minecraft.jpg")
     # parser.run_dots("instructions.txt")
     # parser.parse_image("images/abstract.jpg")
