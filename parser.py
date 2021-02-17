@@ -8,7 +8,7 @@ class Parser:
     zotter_plotter = None
     # HEIGHT_PAPER = 150
     # WIDTH_PAPER = 250
-    PRECISION = 2000
+    PRECISION = 2
 
     instructions = list()
     x_points = list()
@@ -68,18 +68,18 @@ class Parser:
 
         if self.PEN_DOWN == 1:
             self.zotter_plotter.pen_up()
-            print("pen up")
-            # self.PEN_DOWN = 0
+            # print("pen up")
+            self.PEN_DOWN = 0
 
         if num_steps1 == 0:
-            # self.zotter_plotter.draw_ver_line(dir2, num_steps2)
-            print("reposition " + str(dir2) + " " + str(num_steps2))
+            self.zotter_plotter.draw_ver_line(dir2, num_steps2)
+            #print("reposition " + str(dir2) + " " + str(num_steps2))
         elif num_steps2 == 0:
-            # self.zotter_plotter.draw_hor_line(dir1, num_steps1)
-            print("reposition " + str(dir1) + " " + str(num_steps1))
+            self.zotter_plotter.draw_hor_line(dir1, num_steps1)
+            #print("reposition " + str(dir1) + " " + str(num_steps1))
         else:
-            # self.zotter_plotter.draw_diagonal(dir1, dir2, num_steps1, num_steps2)
-            print("reposition " + str(dir1) + " " + str(dir2) + " " + str(num_steps1) + " " + str(num_steps2))
+            self.zotter_plotter.draw_diagonal(dir1, dir2, num_steps1, num_steps2)
+            #print("reposition " + str(dir1) + " " + str(dir2) + " " + str(num_steps1) + " " + str(num_steps2))
 
         self.CURRENT_X = x
         self.CURRENT_Y = y
@@ -100,6 +100,7 @@ class Parser:
                 x = int(instruction_elem[1])
                 y = int(instruction_elem[2])
                 self.execute_reposition(x, y)
+        self.execute_reposition(0, 0)
 
     def run_dots(self, filename):
         instruction_file = open(filename, 'r')
@@ -110,14 +111,14 @@ class Parser:
             x = int(instruction_elem[1])
             y = int(instruction_elem[2])
             self.execute_reposition(x, y)
-            # self.zotter_plotter.pen_down()
-            # self.zotter_plotter.pen_up()
+            self.zotter_plotter.pen_down()
+            self.zotter_plotter.pen_up()
 
     def parse_image(self, path):
 
         pre_image = cv.imread(path)
 
-        scale_percent = 20  # percent of original size
+        scale_percent = 30  # percent of original size
         width = int(pre_image.shape[1] * scale_percent / 100)
         height = int(pre_image.shape[0] * scale_percent / 100)
         dim = (width, height)
@@ -158,11 +159,11 @@ class Parser:
         file.close()
 
         plt.plot(self.x_points, self.y_points, "ro", markersize=2)
-        plt.axis([0, 250, 0, 150])
-        # plt.gca().invert_yaxis()
+        plt.axis([0, 280, 0, 160])
+        plt.gca().invert_yaxis()
         plt.gca().set_aspect('equal', adjustable='box')
-        for i_x, i_y in zip(self.x_points, self.y_points):
-            plt.text(i_x, i_y, '({}, {})'.format(i_x, i_y))
+        #for i_x, i_y in zip(self.x_points, self.y_points):
+         #   plt.text(i_x, i_y, '({}, {})'.format(i_x, i_y))
         plt.show()
 
         # cv.imshow('Contours', image)
@@ -171,7 +172,7 @@ class Parser:
 
 if __name__ == '__main__':
     parser = Parser()
-    parser.parse_image("images/peter.png")
+    parser.parse_image("images/Bobapeter.jpg")
     # parser.parse_image("images/minecraft.jpg")
-    parser.run_dots("instructions.txt")
+    parser.run("instructions.txt")
     # parser.parse_image("images/abstract.jpg")
