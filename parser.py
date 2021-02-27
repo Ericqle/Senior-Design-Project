@@ -6,9 +6,6 @@ import cv2 as cv
 
 class Parser:
     zotter_plotter = None
-    # HEIGHT_PAPER = 150
-    # WIDTH_PAPER = 250
-    PRECISION = 2
 
     instructions = list()
     x_points = list()
@@ -113,12 +110,24 @@ class Parser:
             self.execute_reposition(x, y)
             self.zotter_plotter.pen_down()
             self.zotter_plotter.pen_up()
+        self.execute_reposition(0, 0)
 
-    def parse_image(self, path):
+    def run_abstract(self, filename):
+        instruction_file = open(filename, 'r')
+        Instructions = instruction_file.readlines()
+
+        for instruction in Instructions:
+            instruction_elem = instruction.split(" ")
+            x = int(instruction_elem[1])
+            y = int(instruction_elem[2])
+            # self.execute_draw(x,y)
+        # self.execute_reposition(0, 0)
+
+    def parse_image(self, path, precision, scale):
 
         pre_image = cv.imread(path)
 
-        scale_percent = 30  # percent of original size
+        scale_percent = scale  # percent of original size
         width = int(pre_image.shape[1] * scale_percent / 100)
         height = int(pre_image.shape[0] * scale_percent / 100)
         dim = (width, height)
@@ -138,7 +147,7 @@ class Parser:
 
         for contour in contours:
             reposition = False
-            for point in contour[::self.PRECISION]:
+            for point in contour[::precision]:
                 x = int(point[0][0].item())
                 y = int(point[0][1].item())
 
@@ -169,10 +178,3 @@ class Parser:
         # cv.imshow('Contours', image)
         # cv.waitKey(0)
         # cv.destroyAllWindows()
-
-if __name__ == '__main__':
-    parser = Parser()
-    parser.parse_image("images/Bobapeter.jpg")
-    # parser.parse_image("images/minecraft.jpg")
-    parser.run("instructions.txt")
-    # parser.parse_image("images/abstract.jpg")

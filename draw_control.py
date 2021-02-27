@@ -79,28 +79,3 @@ class DrawControl:
 
         t1.join()
         t2.join()
-
-
-    def draw_diagonal2(self, dir1, dir2, num_steps1, num_steps2):
-        delay1 = 0.01
-        delay2 = 0.01
-        freq1 = 5000.0
-        freq2 = 5000.0
-        num_steps1 = num_steps1
-        num_steps2 = num_steps2
-
-        if num_steps1 > num_steps2:
-            freq2 = (freq2 * (num_steps2 / num_steps1))
-            num_steps2 = num_steps1
-        elif num_steps2 > num_steps1:
-            freq1 = (freq1 * (num_steps2 / num_steps1))
-            num_steps1 = num_steps2
-
-        t1 = threading.Thread(target=self.track.spin_fixed_step_delay_freq2, args=(dir1, num_steps1, delay1, freq1))
-        t2 = threading.Thread(target=self.rail.spin_fixed_step_delay_freq2, args=(dir2, num_steps2, delay2, freq2))
-
-        t1.start()
-        t2.start()
-
-        t1.join()
-        t2.join()
