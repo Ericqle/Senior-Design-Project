@@ -178,3 +178,7 @@ class Parser:
         # cv.imshow('Contours', image)
         # cv.waitKey(0)
         # cv.destroyAllWindows()
+
+if __name__ == '__main__':
+    parser = Parser()
+    parser.parse_image("images/buff_peter.png",2,50)

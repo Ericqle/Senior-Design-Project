@@ -30,11 +30,11 @@ def on_created(event):
             SCALE = 30
             STYLE = "default"
         elif style.__contains__("dotted"):
-            PRECISION = 10
+            PRECISION = 2
             SCALE = 30
             STYLE = "dotted"
         elif style.__contains__("abstract"):
-            PRECISION = 15
+            PRECISION = 10
             SCALE = 30
             STYLE = "abstract"
         STYLE_RECEIVED = True
